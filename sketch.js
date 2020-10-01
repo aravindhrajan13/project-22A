@@ -39,6 +39,28 @@ function setup() {
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 	
+	 boxPosition=width/2-100;
+	 boxY=610;
+   
+   boxLeftSprite=createSprite(boxPosition,boxY,20,100);
+   boxLeftSprite.shapeColor=color(255,0,0);
+
+   boxLeftBody=Bodies.rectangle(boxPosition+20,boxY,20,100,{isStatic:true});
+   World.add(world,boxLeftBody);
+
+   boxBase=createSprite(boxPosition+100,boxY+40,200,20);
+   boxBase.shapeColor=color(255,0,0);
+
+   boxBottomBody=Bodies.rectangle(boxPosition+100,boxY+45-20,200,20);
+   World.add(world, boxBottomBody);
+
+   boxLeftSprite=createSprite(boxPosition+200,boxY,20,100);
+   boxLeftSprite.shapeColor=color(255,0,0);
+
+   boxRightBody=Bodies.rectangle(boxPosition+200-20,boxY,20,100,{isStatic:true});
+   World.add(world,boxRightBody);
+
+	
 	Engine.run(engine);
   
 }
@@ -55,10 +77,22 @@ function draw() {
 
 function keyPressed() {
  if (keyCode === DOWN_ARROW) {
-    // Look at the hints in the document and understand how to make the package body fall only on
-    Matter.Body.setStatic(packageBody,false);
+	helicopterSprite.x=helicopterSprite.x-20;
+	translation={x:-20,y:0}
+	Matter.Body.translate(packageBody,translate)
+	 
+  }
+  else if(keyCode===RIGHT_ARROW){
+	helicopterSprite.x=helicopterSprite.x+20;
+	translation={x:20,y:0}
+	Matter.Body.translate(packageBody,translate)  
+
+  }
+  else if(keyCode === DOWN_ARROW){
+	  
+Matter.Body.setStatic(packageBody,false);
+
   }
 }
-
 
 
